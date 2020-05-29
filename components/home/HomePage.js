@@ -22,7 +22,22 @@ const HomePage = (props) => {
 
   const addToList = (meal) => {
     var list = _.cloneDeep(props.list)
-    list = list.concat(meal.ingredients)
+
+    console.log(list);
+
+    var mappedMealItems = meal.ingredients.map(it => {
+      var foundIndex = list.findIndex(listItem => listItem.ingredient === it)
+
+      if (foundIndex !== -1) {
+        var amount = list[foundIndex].amount + 1
+        list.splice(foundIndex, 1);
+        return { ingredient: `${it}`, inCart: false, amount }
+      } else {
+        return { ingredient: it, inCart: false, amount: 1 }
+      }
+    })
+
+    list = list.concat(mappedMealItems)
     props.setListItems(list)
   }
 
@@ -59,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#F5FCFF',
     color: '#28262C',
     height: 50,
     fontSize: 100

@@ -19,6 +19,12 @@ export const meals = [
     },
     {
         key: '3',
+        name: 'Brats and SP FF',
+        ingredients: ['Brats', 'Hotdog Buns', 'Sweet Potatoes', 'Onion', 'Peppers', 'Ketchup'],
+        pic: { uri: "https://images.louisiana-grills.com/catalog/recipes/1200px/ChiliCheeseBrats_LG.jpg" }
+    },
+    {
+        key: '4',
         name: 'New Meal',
         pic: { uri: "https://salesforce.publicissapient.com/wp-content/uploads/2016/07/large-white-page-desktop-background.jpg" }
     },

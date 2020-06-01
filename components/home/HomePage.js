@@ -35,6 +35,8 @@ const HomePage = (props) => {
   }, [])
 
 
+  console.log(props);
+
   const addToList = (meal) => {
     var list = _.cloneDeep(props.list)
 
@@ -69,6 +71,9 @@ const HomePage = (props) => {
         <View style={styles.header}>
           <Text style={{ fontSize: 20, paddingTop: 10 }}>Pick Meals To Add To Cart</Text>
         </View>
+        <TouchableOpacity style={styles.newMeal} delayPressIn={50} onPress={() => props.navigation.navigate('Add Meal')}>
+          <Text style={styles.newMealText}>Create A Meal</Text>
+        </TouchableOpacity>
         {
           meals.map(meal => {
             return (
@@ -78,9 +83,6 @@ const HomePage = (props) => {
             )
           })
         }
-        <TouchableOpacity style={styles.newMeal} delayPressIn={50}>
-          <Text style={styles.newMealText}>Create A Meal</Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

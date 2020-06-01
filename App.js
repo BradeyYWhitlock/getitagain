@@ -10,11 +10,25 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import combineReducers from './state/reducers/index';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AddMeal from './components/addMeal/AddMeal'
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 
 const Tab = createBottomTabNavigator();
 
 const store = createStore(combineReducers);
+
+function HomeStackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Meals" component={HomePage} />
+      <Stack.Screen name="Add Meal" component={AddMeal} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -26,7 +40,7 @@ export default function App() {
           }}>
           <Tab.Screen
             name="Meals"
-            component={HomePage}
+            component={HomeStackNavigator}
             options={{
               tabBarLabel: 'Meals',
               tabBarIcon: ({ color, size }) => (
@@ -45,6 +59,6 @@ export default function App() {
           />
         </Tab.Navigator>
       </NavigationContainer>
-    </Provider>
+    </Provider >
   );
 }

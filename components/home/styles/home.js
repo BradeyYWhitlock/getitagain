@@ -22,7 +22,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         resizeMode: 'stretch',
-        height: 150,
+        height: 50,
         width: Dimensions.get('window').width - 30,
         backgroundColor: '#04C2B5',
         borderRadius: 5,

@@ -4,6 +4,7 @@ import { setListItems } from '../../state/actions/grocerylist';
 import ListItem from './ListItem';
 import _ from 'lodash'
 import { TextInput, StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TouchableOpacity } from 'react-native';
+import styles from './styles/listPage';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -43,17 +44,15 @@ const ListPage = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.listItems} stickyHeaderIndices={[0]}>
+      <ScrollView style={styles.listItems} stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View style={styles.addItem}>
-            <TouchableOpacity style={styles.button} onPress={() => clearSelected()} underlayColor='#fff'>
+            <TouchableOpacity style={styles.clearSelectedButton} onPress={() => clearSelected()} underlayColor='#fff'>
               <Text style={{ color: 'white', fontSize: 14 }}>Clear Selected Items</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => props.setListItems([])} underlayColor='#fff'>
+            <TouchableOpacity style={styles.clearAllButton} onPress={() => props.setListItems([])} underlayColor='#fff'>
               <Text style={{ color: 'white', fontSize: 14 }}>Clear All Items</Text>
             </TouchableOpacity>
-            {/* <Button style={styles.button} title="Clear Selected Items" onPress={() => clearSelected()} />
-            <Button title="Clear All Items" onPress={() => clearSelected()} /> */}
           </View>
           <View style={styles.addItem}>
             <TextInput
@@ -76,40 +75,3 @@ const ListPage = (props) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    alignItems: 'center'
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    color: '#28262C',
-    height: 120,
-    fontSize: 100
-  },
-  listItems: {
-    flex: 1,
-    width: '100%',
-  },
-  addItem: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '80%',
-    height: 30
-  },
-  button: {
-    backgroundColor: '#04C2B5',
-    padding: 10,
-    borderRadius: 5,
-    margin: 10
-  }
-});

@@ -63,4 +63,4 @@ buck-out/
 web-build/
 
 #App
-services/firebaseConfig.js
+services/

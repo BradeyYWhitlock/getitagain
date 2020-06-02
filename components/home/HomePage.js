@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { setListItems, setMeals } from '../../state/actions/grocerylist';
+import { clearMealData } from '../../state/actions/addMeal'
 import { Platform, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Button, Dimensions, Alert } from 'react-native';
 import MealItem from './MealItem';
 import _ from 'lodash'
@@ -13,6 +14,7 @@ function mapDispatchToProps(dispatch) {
   return {
     setListItems: (list) => dispatch(setListItems(list)),
     setMeals: (meals) => dispatch(setMeals(meals)),
+    clearMealData: () => dispatch(clearMealData())
   };
 }
 
@@ -29,13 +31,9 @@ const HomePage = (props) => {
 
   useEffect(() => {
     db.ref('/meals').on('value', querySnapShot => {
-      console.log(querySnapShot.val());
       props.setMeals(querySnapShot.val())
     });
   }, [])
-
-
-  console.log(props);
 
   const addToList = (meal) => {
     var list = _.cloneDeep(props.list)
@@ -65,13 +63,18 @@ const HomePage = (props) => {
     });
   }
 
+  const clearMealData = () => {
+    props.clearMealData()
+    props.navigation.navigate('Name')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={{ fontSize: 20, paddingTop: 10 }}>Pick Meals To Add To Cart</Text>
         </View>
-        <TouchableOpacity style={styles.newMeal} delayPressIn={50} onPress={() => props.navigation.navigate('Add Meal')}>
+        <TouchableOpacity style={styles.newMeal} delayPressIn={50} onPress={() => clearMealData()}>
           <Text style={styles.newMealText}>Create A Meal</Text>
         </TouchableOpacity>
         {

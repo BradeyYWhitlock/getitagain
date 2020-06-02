@@ -10,21 +10,25 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import combineReducers from './state/reducers/index';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import AddMeal from './components/addMeal/AddMeal'
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from 'react-native';
+import NameYourMeal from './components/addMeal/NameYourMeal'
+import Ingredients from './components/addMeal/Ingredients'
+import Instructions from './components/addMeal/Instructions'
 
 const Stack = createStackNavigator();
-
-
 const Tab = createBottomTabNavigator();
-
 const store = createStore(combineReducers);
 
-function HomeStackNavigator() {
+function HomeStackNavigator(props) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
       <Stack.Screen options={{ headerShown: false }} name="Meals" component={HomePage} />
-      <Stack.Screen name="Add Meal" component={AddMeal} />
+      <Stack.Screen name="Name" component={NameYourMeal} />
+      <Stack.Screen name="Ingredients" component={Ingredients} />
+      <Stack.Screen name="Instructions" component={Instructions} />
     </Stack.Navigator>
   );
 }
@@ -53,7 +57,7 @@ export default function App() {
             options={{
               tabBarLabel: 'Grocery List',
               tabBarIcon: ({ color, size }) => (
-                <FontAwesome5 style={{ fontSize: 20, color }} name='list' />
+                <FontAwesome5 style={{ fontSize: 20, color }} name='shopping-basket' />
               ),
             }}
           />

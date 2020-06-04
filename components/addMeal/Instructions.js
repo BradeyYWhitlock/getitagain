@@ -62,7 +62,6 @@ const Instructions = (props) => {
             <FontAwesome5 style={style.listIcon} name='list-ol' />
             <Text style={style.nameYourMealHeaderText}>How Do You Make It?</Text>
             <View style={style.instructionArea}>
-                {/* <Text style={style.stepName}>Step 1</Text> */}
                 <Carousel
                     layout={'default'}
                     layoutCardOffset={18}
